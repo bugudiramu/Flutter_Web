@@ -39,7 +39,6 @@ class CopyrightWidget extends StatelessWidget {
 
   Widget socialMediaLinks(String image, String url) {
     return InkWell(
-      
       onTap: () => launchUrl(url),
       child: Container(
         padding: const EdgeInsets.all(12.0),
@@ -47,12 +46,10 @@ class CopyrightWidget extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.white,
-
-          boxShadow: [
-            BoxShadow(color: Colors.white, blurRadius: 0.8),
-            BoxShadow(color: Colors.white, blurRadius: 0.8),
-          ],
-          border: Border.all(color: Colors.white60, width: 3.0,),
+          border: Border.all(
+            color: Colors.white60,
+            width: 3.0,
+          ),
         ),
         child: Image.asset(
           image,
@@ -80,4 +77,4 @@ class CopyrightWidget extends StatelessWidget {
     }
   }
 }
-// *Copyright © Your Website 2019
+// *Copyright © ramubugudi 2019

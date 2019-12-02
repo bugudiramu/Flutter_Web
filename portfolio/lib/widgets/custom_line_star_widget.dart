@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:random_color/random_color.dart';
 
 class CustomLineStarWidget extends StatefulWidget {
   CustomLineStarWidget({this.borderColor});
@@ -10,12 +9,9 @@ class CustomLineStarWidget extends StatefulWidget {
 }
 
 class _CustomLineStarWidgetState extends State<CustomLineStarWidget> {
-  var randomColor = RandomColor();
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    // final height = MediaQuery.of(context).size.height;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[

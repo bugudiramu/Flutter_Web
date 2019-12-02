@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/constants/constants.dart';
+import 'package:portfolio/pages/welcome_message_page.dart';
 import 'package:portfolio/widgets/custom_line_star_widget.dart';
-import 'package:random_color/random_color.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class ContactPage extends StatefulWidget {
@@ -60,9 +60,20 @@ class _ContactPageState extends State<ContactPage> {
                 Container(
                   alignment: Alignment.topLeft,
                   child: MaterialButton(
+                    onPressed: () {
+                      var validator = _formKey.currentState.validate();
+                      _formKey.currentState.save();
+                      if (validator || nameController.text.length > 0) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => WelcomeMsgPage(
+                                name: nameController.text,
+                                email: emailController.text,
+                                msg: msgController.text)));
+                        _formKey.currentState.reset();
+                      }
+                    },
                     hoverColor: Colors.pink,
-                    color: Colors.black.withOpacity(0.77),
-                    onPressed: () {},
+                    color: Constants.myPrimaryColor,
                     child: Text("Send",
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold)),
@@ -80,14 +91,28 @@ class _ContactPageState extends State<ContactPage> {
   }
 
   _textFormField(controller, hintText) {
-    var randomColor = RandomColor();
     return TextFormField(
+      // autovalidate: true,
+      enableInteractiveSelection: true,
+      toolbarOptions:
+          ToolbarOptions(copy: true, cut: true, paste: true, selectAll: true),
+      // onSaved: (val) {
+      //   setState(() {
+      //     controller.text = val;
+      //   });
+      // },
+      validator: (val) {
+        if (val.isEmpty || val.length < 0) {
+          print(val);
+          return "Please provide atleast you'r name";
+        }
+        return "";
+      },
       controller: controller,
       decoration: InputDecoration(hintText: hintText),
       onChanged: (text) {
         print(text);
       },
-      cursorColor: randomColor.randomColor(),
     );
   }
 }

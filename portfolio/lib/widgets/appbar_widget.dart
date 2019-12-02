@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:portfolio/blocs/portfolio_bloc.dart';
 import 'package:portfolio/constants/constants.dart';
 import 'package:portfolio/pages/about_page.dart';
 import 'package:portfolio/pages/contact_page.dart';
 import 'package:portfolio/pages/projects_page.dart';
 
-class AppBarWidget extends StatelessWidget {
+class AppBarWidget extends StatefulWidget {
+  @override
+  _AppBarWidgetState createState() => _AppBarWidgetState();
+}
+
+class _AppBarWidgetState extends State<AppBarWidget> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
@@ -31,11 +34,12 @@ class AppBarWidget extends StatelessWidget {
                     children: <Widget>[
                       SizedBox(width: 20.0),
                       navbarItems(
-                          "WORK",
-                          ProjectsWidget(
-                            width: width,
-                            height: height,
-                          )),
+                        "WORK",
+                        ProjectsWidget(
+                          width: width,
+                          height: height,
+                        ),
+                      ),
                       SizedBox(width: 20.0),
                       navbarItems("ABOUT", AboutPage()),
                       SizedBox(width: 20.0),
@@ -59,17 +63,14 @@ class AppBarWidget extends StatelessWidget {
           color: Colors.blue,
         ),
         onPressed: () {
-          BlocProvider.of<ThemeBloc>(context).add(ThemeEvent.toggle);
+          // * Control the DarkMode
+          // BlocProvider.of<ThemeBloc>(context).add(ThemeEvent.toggle);
         },
       ),
     );
   }
 
   navbarItems(String s, Widget page) {
-    /* onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Material(child: page,)));
-                },*/
     return Container(
       child: Text(
         s,
@@ -92,3 +93,23 @@ class AppBarWidget extends StatelessWidget {
     );
   }
 }
+
+// ScrollController _scrollController;
+// static List<Widget> tabWidgets = [
+//   MyProfileWidget(),
+//   ProjectsWidget(),
+//   AboutPage(),
+//   ContactPage(),
+//   CopyrightWidget(),
+// ];
+// final itemSize = tabWidgets.length.toDouble();
+// @override
+// void initState() {
+//   super.initState();
+//   _scrollController = ScrollController();
+// }
+
+// _moveDown() {
+//   _scrollController.animateTo(200.0,
+//       curve: Curves.linear, duration: Duration(milliseconds: 500));
+// }

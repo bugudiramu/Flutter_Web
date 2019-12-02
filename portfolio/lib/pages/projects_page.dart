@@ -1,11 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:portfolio/constants/constants.dart';
 import 'package:portfolio/widgets/custom_line_star_widget.dart';
-import 'package:random_color/random_color.dart';
 
 class ProjectsWidget extends StatelessWidget {
-  const ProjectsWidget({Key key, @required this.height, @required this.width})
-      : super(key: key);
+  const ProjectsWidget({
+    Key key,
+    this.height,
+    this.width,
+  }) : super(key: key);
 
   final double width;
   final double height;
@@ -13,7 +17,7 @@ class ProjectsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.transparent,
+      decoration: BoxDecoration(),
       width: width,
       alignment: Alignment.center,
       child: Column(
@@ -42,43 +46,43 @@ class ProjectsWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    projectContainer(Constants.bmi),
-                    projectContainer(Constants.news),
-                    projectContainer(Constants.ebazaar),
+                    projectContainer(Constants.bmi, context),
+                    projectContainer(Constants.news, context),
+                    projectContainer(Constants.ebazaar, context),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    projectContainer(Constants.calculator),
-                    projectContainer(Constants.weather),
-                    projectContainer(Constants.tasklist),
+                    projectContainer(Constants.calculator, context),
+                    projectContainer(Constants.weather, context),
+                    projectContainer(Constants.tasklist, context),
                   ],
                 ),
               ],
             )
-          else if (width > 800 && width < 1200)
+          else if (width > 700 && width < 1200)
             Column(
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    projectContainer(Constants.bmi),
-                    projectContainer(Constants.news),
+                    projectContainer(Constants.bmi, context),
+                    projectContainer(Constants.news, context),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    projectContainer(Constants.ebazaar),
-                    projectContainer(Constants.calculator),
+                    projectContainer(Constants.ebazaar, context),
+                    projectContainer(Constants.calculator, context),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    projectContainer(Constants.weather),
-                    projectContainer(Constants.tasklist),
+                    projectContainer(Constants.weather, context),
+                    projectContainer(Constants.tasklist, context),
                   ],
                 ),
               ],
@@ -87,12 +91,12 @@ class ProjectsWidget extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                projectContainer(Constants.bmi),
-                projectContainer(Constants.news),
-                projectContainer(Constants.ebazaar),
-                projectContainer(Constants.calculator),
-                projectContainer(Constants.weather),
-                projectContainer(Constants.tasklist),
+                projectContainer(Constants.bmi, context),
+                projectContainer(Constants.news, context),
+                projectContainer(Constants.ebazaar, context),
+                projectContainer(Constants.calculator, context),
+                projectContainer(Constants.weather, context),
+                projectContainer(Constants.tasklist, context),
               ],
             ),
           SizedBox(height: 60.0),
@@ -101,23 +105,61 @@ class ProjectsWidget extends StatelessWidget {
     );
   }
 
-  Widget projectContainer(String img) {
-    var randomColor = RandomColor();
+  Widget projectContainer(String img, context) {
+    var myColors = [
+      Colors.black,
+      Colors.blue,
+      Colors.pink,
+      Colors.yellow,
+      Colors.grey,
+      Colors.orange,
+      Colors.purple,
+      Colors.indigo,
+      Colors.cyan,
+      Colors.amber,
+    ];
 
-    return Container(
-      decoration: BoxDecoration(
-        backgroundBlendMode: BlendMode.colorBurn,
-        color: randomColor.randomColor(),
-        borderRadius: BorderRadius.circular(10.0),
+    Random random = Random();
+    return MaterialButton(
+      splashColor: Colors.transparent,
+      hoverElevation: 10.0,
+      onPressed: () => _showDialogAboutProject(context),
+      child: Container(
+        decoration: BoxDecoration(
+          backgroundBlendMode: BlendMode.colorBurn,
+          // color: myColors[random.nextInt(6)],
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        margin: const EdgeInsets.all(20.0),
+        alignment: Alignment.center,
+        height: 200.0,
+        width: 300.0,
+        child: Image.asset(
+          img,
+          height: 150.0,
+          width: 150.0,
+        ),
       ),
-      margin: const EdgeInsets.all(20.0),
-      alignment: Alignment.center,
-      height: 200.0,
-      width: 300.0,
-      child: Image.asset(
-        img,
-        height: 150.0,
-        width: 150.0,
+    );
+  }
+
+  _showDialogAboutProject(context) {
+    return showDialog(
+      context: context,
+      child: AlertDialog(
+        title: Text("Project Title"),
+        content: ListTile(
+          title: Text("Description of the Project"),
+          subtitle: Text(
+              "If you want to see the the project details head over to my GitHub profile (click the github icon below the contact section)"),
+        ),
+        actions: <Widget>[
+          MaterialButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text("Close"),
+          ),
+        ],
       ),
     );
   }

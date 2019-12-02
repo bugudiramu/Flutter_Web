@@ -50,7 +50,8 @@ class AboutPage extends StatelessWidget {
       child: SelectableText(
         "“My Name Is Bugudi Ramu And I Am A Mobile,Web Developer And Programmer Aswell.I Am From India. I Will Get My Graduation In 2020 With A Bachelor’s Degree In Electronic And Communication Engineering From Bharath Institute Of Higher Education And Research(BIHER) In Chennai(Tamilnadu). I Served My Most Of The Time In Practicing,Exploring New Ways For Solving Problems And Doing Projects.As I Am Self-Taught I'm Looking For Right Platform To Explore My Knowledge And Improve Skills.”",
         scrollPhysics: ClampingScrollPhysics(),
-        style: TextStyle(color: Colors.white),
+        style:
+            TextStyle(color: Colors.white, fontSize: 16.0, letterSpacing: 1.0),
       ),
     );
   }
